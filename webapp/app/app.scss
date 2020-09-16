@@ -1,0 +1,44 @@
+
+$euiColorPrimary: #4166dd;
+$euiColorSecondary: #20cb9d; // #76eacc;
+$euiColorDanger: #ff638e;
+$euiColorWarning: #ffb514;
+
+select {
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
+}
+
+/* For IE10 */
+select::-ms-expand {
+  display: none;
+}
+
+/* Main navigation */
+@media only screen and (min-width: 1200px){
+    .euiNavDrawer-isLocked ~ #app-wrapper {
+        padding-left: 240px !important;
+    }
+}
+
+// This is the default theme.
+@import '~@elastic/eui/src/themes/eui/eui_colors_light';
+
+// Global styling
+@import '~@elastic/eui/src/global_styling/index';
+
+// Components
+@import '~@elastic/eui/src/components/index';
+
+// Packages
+@import '~@elastic/eui/packages/index';
+
+// Charts
+@import '~@elastic/charts/dist/theme';
+
+// Fonts
+@import url('fonts/roboto-mono/roboto-mono.css');
+@import url('fonts/inter/inter.css');
+
