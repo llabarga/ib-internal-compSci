@@ -52,16 +52,15 @@ function Admin() {
         <EuiFlexItem>
           <EuiDescriptionList>
             <EuiDescriptionListTitle>
-              Timers
+             List of timers
             </EuiDescriptionListTitle>
-            <EuiDescriptionListDescription>
-              List of timers
-            </EuiDescriptionListDescription>
           </EuiDescriptionList>
         </EuiFlexItem>
-
       </EuiFlexGroup>
     <TimerTable />
+    <EuiButton size="s"> Add </EuiButton>
+    <EuiButton size="s"> Load </EuiButton>
+    <EuiButton size="s"> Show </EuiButton>
       </>
      </Page>
     </div>
