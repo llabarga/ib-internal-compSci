@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 // import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,6 +14,7 @@ import {
   EuiCard,
   EuiIcon,
   EuiFlexGroup,
+  EuiFlexGrid,
   EuiFlexItem,
   EuiButton,
 } from '@elastic/eui';
@@ -38,48 +39,26 @@ function Visual() {
   const dispatch = useDispatch();
   /* eslint-enable no-unused-vars */
 
+
+  const timers = visual.timers.map((t) => ({'name': t.name, 'time': t.length}));
+  const [timeLeft, setTimeLeft] = useState(timers);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeLeft(timeLeft.map((x)=>({...x, 'time': x.time-1})));
+    }, 1000);
+  });
+
   const icons = ['Beats', 'Cloud', 'Logging', 'Kibana'];
 
-  const timers =[
-    {
-      id:1,
-      name: 'Prueba 1',
-      subject: 'Castellano',
-      level: 'NM',
-      length: 120,
-      readingTime: false,
-      icon:'Cloud',
-    },
-
-    {
-      id:2,
-      name: 'Prueba 2',
-      subject: 'Biología',
-      level: 'NS',
-      length: 60,
-      readingTime: false,
-      icon:'Cloud',
-    },
-
-    {
-      id:3,
-      name: 'Prueba 2',
-      subject: 'English',
-      level: 'NS',
-      length: 120,
-      readingTime: true,
-      icon:'Kibana',
-    }
-  ];
-
-  const cardNodes = timers.map(function(item, index) {
+  const cardNodes = visual.timers.map(function(item, index) {
   return (
     <EuiFlexItem key={index}>
     <EuiCard
      icon={<EuiIcon size="xxl" type={`logo${item.icon}`} />}
      title={item.name}
      isDisabled={item.icon === 'Kibana' ? true : false}
-     description={item.subject + "  "+item.length + " minutos " + item.level}
+     description={item.subject + "  "+timeLeft.find((x) => (x.name === item.name)).time + " minutos " + item.level}
      onClick={() => window.alert('Timeout')}
     />
 
@@ -93,7 +72,7 @@ function Visual() {
 
        These are your timers!
 
-       <EuiFlexGroup gutterSize="l">{cardNodes}</EuiFlexGroup>
+       <EuiFlexGrid gutterSize="l" columns={2}>{cardNodes}</EuiFlexGrid>
        <EuiButton> Add </EuiButton>
        </>
 
