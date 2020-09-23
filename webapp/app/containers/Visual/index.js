@@ -26,6 +26,7 @@ import reducer from './reducer';
 import saga from './saga';
 import m from './messages';
 import Page from 'components/Page';
+import TimerCard from 'components/TimerCard';
 const stateSelector = createStructuredSelector({
   visual: makeSelectVisual(),
 });
@@ -54,12 +55,9 @@ function Visual() {
   const cardNodes = visual.timers.map(function(item, index) {
   return (
     <EuiFlexItem key={index}>
-    <EuiCard
-     icon={<EuiIcon size="xxl" type={`logo${item.icon}`} />}
-     title={item.name}
-     isDisabled={item.icon === 'Kibana' ? true : false}
-     description={item.subject + "  "+timeLeft.find((x) => (x.name === item.name)).time + " minutos " + item.level}
-     onClick={() => window.alert('Timeout')}
+
+    <TimerCard
+      item={item}
     />
 
     </EuiFlexItem>
