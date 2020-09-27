@@ -17,6 +17,7 @@ import {
   EuiDescriptionList,
   EuiFlexGroup,
   EuiFlexItem,
+  EuiButton,
 } from '@elastic/eui';
 
 import { useInjectSaga } from 'utils/injectSaga';

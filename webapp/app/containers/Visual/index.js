@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 // import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
@@ -26,6 +26,7 @@ import reducer from './reducer';
 import saga from './saga';
 import m from './messages';
 import Page from 'components/Page';
+import TimerCard from 'components/TimerCard';
 const stateSelector = createStructuredSelector({
   visual: makeSelectVisual(),
 });
@@ -39,7 +40,18 @@ function Visual() {
   const dispatch = useDispatch();
   /* eslint-enable no-unused-vars */
 
+
+  const timers = visual.timers.map((t) => ({'name': t.name, 'time': t.length}));
+  const [timeLeft, setTimeLeft] = useState(timers);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeLeft(timeLeft.map((x)=>({...x, 'time': x.time-1})));
+    }, 1000);
+  });
+
   const icons = ['Beats', 'Cloud', 'Logging', 'Kibana'];
+
 
   const timers =[
     {
@@ -255,16 +267,12 @@ function Visual() {
   ];
 
   const ITEM_STYLE = { width: '300px' };
-
-  const cardNodes = timers.map(function(item, index) {
+  const cardNodes = visual.timers.map(function(item, index) {
   return (
-    <EuiFlexItem key={index} style={ITEM_STYLE}>
-    <EuiCard
-     icon={<EuiIcon size="xxl" type={`logo${item.icon}`} />}
-     title={item.subject}
-     isDisabled={item.icon === 'Kibana' ? true : false}
-     description={item.name + item.level+ item.length + " minutos " }
-     onClick={() => window.alert('Timeout')}
+    <EuiFlexItem key={index}>
+
+    <TimerCard
+      item={item}
     />
 
     </EuiFlexItem>
@@ -278,6 +286,7 @@ function Visual() {
        These are your timers!
 
        <EuiFlexGrid gutterSize="l" columns={2}>{cardNodes}</EuiFlexGrid>
+
 
        </>
 
