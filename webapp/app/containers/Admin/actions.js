@@ -1,4 +1,4 @@
-Exam/*
+/*
  *
  * Admin actions
  *
@@ -54,16 +54,16 @@ Exam/*
   * Sets the form state
   * @param  {string} description the new text of the email input field of the form
   */
- export function changeFormDesc(description) {
-   return { type: CHANGE_FORM_DESC, description };
+ export function changeFormSubject(subject) {
+   return { type: CHANGE_FORM_SUBJECT, subject };
  }
 
  /**
   * Sets the form state
   * @param  {string} description the new text of the email input field of the form
   */
- export function changeFormTargetPopulation(target) {
-   return { type: CHANGE_FORM_TARGET, target };
+ export function changeFormLevel(level) {
+   return { type: CHANGE_FORM_LEVEL, level };
  }
 
  /**

@@ -65,14 +65,16 @@ const columns = [
   },
 ];
 
-function TimerTable() {
+function TimerTable({items, onRowEdit, onRowClone, onRowDelete}) {
+
+  console.log(items);
   return (
     <>
     <div>
       <FormattedMessage {...m.header} />
     </div>
     <EuiBasicTable
-      items={timers}
+      items={items}
       columns={columns}
     />
     </>
