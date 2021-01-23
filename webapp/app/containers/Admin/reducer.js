@@ -44,7 +44,7 @@ export const initialState = {
     name: 'Prueba 2',
     subject: 'Lengua B',
     level: 'NS',
-    length: 60,
+    length: 10,
     readingTime: true,
     icon:'Kibana',
   },

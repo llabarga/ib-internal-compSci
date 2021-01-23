@@ -32,6 +32,8 @@ import {
   EuiTextArea,
   EuiFieldNumber,
   EuiButtonEmpty,
+  EuiCheckboxGroup,
+  EuiSelect,
 } from '@elastic/eui';
 
 
@@ -89,6 +91,13 @@ function Admin() {
     // This resets the form
     dispatch(resetForm());
   };
+
+  const [checked] = useState(false);
+
+  const onChange = (e) => {
+    setChecked(e.target.checked);
+  };
+
   return (
     <div>
       <Helmet>
@@ -110,6 +119,7 @@ function Admin() {
           </EuiButton>
         </div>
       </EuiFlexItem>
+
         <EuiFlexItem>
           <TimerTable
             items={admin.items}
@@ -150,6 +160,8 @@ function Admin() {
                     />
                   </EuiFormRow>
                 </EuiFlexItem>
+
+
                 <EuiFlexItem grow={false}>
                   <EuiFormRow
                     label="Description"
@@ -162,12 +174,32 @@ function Admin() {
                         dispatch(changeFormDesc(evt.target.value))
                       }
                       value={admin.subject}
-                    />
-                  </EuiFormRow>
+                      />
+                        </EuiFormRow>
+                        </EuiFlexItem>
+                        <EuiFlexItem grow={false}>
+
+                        <EuiFormRow
+                        label="Select level"
+                          >
+                            <EuiSelect
+                              hasNoInitialSelection
+                              options={[
+                                { value: 'option_one', text: 'High level' },
+                                { value: 'option_two', text: 'Standard level' },
+                              ]}
+                            />
+
+                          </EuiFormRow>
+                                  
                 </EuiFlexItem>
               </EuiFlexGroup>
             </EuiForm>
           </EuiFlyoutBody>
+
+
+
+
           <EuiFlyoutFooter>
             <EuiFlexGroup justifyContent="spaceBetween">
               <EuiFlexItem grow={false}>

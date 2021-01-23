@@ -4,7 +4,7 @@
  *
  */
 
-import React, {useEffect, useState}  from "react";
+import React, {useEffect, useState, useRef}  from "react";
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
@@ -47,17 +47,39 @@ const toggleButtonsIcons = [
 
 function TimerCard({item}) {
 
-
+  const audio = useRef(null);
   const [toggleIconIdSelected, setToggleIconIdSelected] = useState(
     `${idPrefix3}0`
   );
 
-  const [timeLeft, setTimeLeft] = useState(item.length);
+  const timeString = (seconds) => {
+    var date = new Date(0);
+    date.setSeconds(seconds);
+    return date.toISOString().substr(11,8);
+  }
+
+  const [timer, setTimer] = useState();
+  const [timeLeft, setTimeLeft] = useState(item.length*60);
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (started) setTimeLeft(timeLeft-1);
+
+    const t = setTimeout(() => {
+
+
+      if (started & timeLeft>1) {
+        setTimeLeft(timeLeft-1);
+
+        if (timeLeft === 50) audio.current.play();
+        if (timeLeft === 30) audio.current.play();
+
+      }
+      if (timeLeft === 1) {
+        setStarted(false);
+        setTimeLeft(0);
+        audio.current.play();
+        console.log('se acabo el tiempo');
+        }
     }, 1000);
   });
 
@@ -84,10 +106,10 @@ function TimerCard({item}) {
   return (
     <>
     <EuiCard
-     icon={<EuiIcon size="xxl" type={`logo${item.icon}`} />}
-     title={item.name}
+     icon={<EuiIcon size="xl" type={`logo${item.icon}`} />}
+     title={item.subject}
      isDisabled={item.icon === 'Kibana' ? true : false}
-     description={item.subject + "  "+ timeLeft + " minutos " + item.level}
+     description={item.name + "  "+ timeString(timeLeft) + " " + item.level}
      onClick={() => window.alert('Timeout')}
     />
     <EuiButtonGroup
@@ -98,6 +120,8 @@ function TimerCard({item}) {
       onChange={id => onChangeIcons(id)}
       isIconOnly
     />
+    <audio ref={audio} id="beep" preload="auto" src="https://soundbible.com/grab.php?id=1746&type=mp3" />
+
     </>
   );
 

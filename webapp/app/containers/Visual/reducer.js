@@ -15,7 +15,7 @@ export const initialState = {
     name: 'Prueba 1',
     subject: 'Lengua B',
     level: 'NM',
-    length: 75,
+    length: 5,
     readingTime: false,
     icon:'Cloud',
   },

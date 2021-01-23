@@ -1,6 +1,6 @@
 // import { take, call, put, select } from 'redux-saga/effects';
 
-import {todosRef} from '../../utils/firebase'
+//import {todosRef} from '../../utils/firebase'
 // Individual exports for testing
 export default function* adminSaga() {
   // See example in containers/HomePage/saga.js

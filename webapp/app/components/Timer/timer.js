@@ -16,6 +16,7 @@ const timer = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (state.running) dispatch({ type: actions.TICK });
+
     }, 1000);
     return () => clearInterval(interval);
   }, [state.running]);
@@ -23,6 +24,7 @@ const timer = () => {
   // SWITCH STAGE AND SOUND ALARM
   useEffect(() => {
     if (state.timer === 0) {
+      console.log('se acabo el tiempo');
       audio.current.play();
       dispatch({ type: actions.SWITCH_STAGE });
     }
