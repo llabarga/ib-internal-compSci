@@ -10,6 +10,9 @@
    CHANGE_FORM_SUBJECT,
    CHANGE_FORM_LEVEL,
    CHANGE_FORM_REFILL,
+   CHANGE_FORM_DESC,
+   CHANGE_FORM_DATE,
+   CHANGE_FORM_DURATION,
    RESET_FORM,
    LOAD_EXAMS_SUCCESS,
    LOAD_EXAMS_ERROR,
@@ -52,6 +55,13 @@
 
  /**
   * Sets the form state
+  * @param  {string} name the new text of the email input field of the form
+  */
+ export function changeFormDesc(description) {
+   return { type: CHANGE_FORM_DESC, description };
+ }
+ /**
+  * Sets the form state
   * @param  {string} description the new text of the email input field of the form
   */
  export function changeFormSubject(subject) {
@@ -64,6 +74,22 @@
   */
  export function changeFormLevel(level) {
    return { type: CHANGE_FORM_LEVEL, level };
+ }
+
+ /**
+  * Sets the form state
+  * @param  {string} description the new text of the email input field of the form
+  */
+ export function changeFormDate(fecha) {
+   return { type: CHANGE_FORM_DATE, fecha };
+ }
+
+ /**
+  * Sets the form state
+  * @param  {string} description the new text of the email input field of the form
+  */
+ export function changeFormDuration(duration) {
+   return { type: CHANGE_FORM_DURATION, duration };
  }
 
  /**

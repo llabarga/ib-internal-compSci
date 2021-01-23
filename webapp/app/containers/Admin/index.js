@@ -34,6 +34,7 @@ import {
   EuiButtonEmpty,
   EuiCheckboxGroup,
   EuiSelect,
+  EuiDatePicker,
 } from '@elastic/eui';
 
 
@@ -41,6 +42,9 @@ import {
   changeFormSubject,
   changeFormName,
   changeFormLevel,
+  changeFormDesc,
+  changeFormDate,
+  changeFormDuration,
   examClone,
   examSave,
   examDelete,
@@ -173,33 +177,49 @@ function Admin() {
                       onChange={evt =>
                         dispatch(changeFormDesc(evt.target.value))
                       }
-                      value={admin.subject}
+                      value={admin.description}
                       />
                         </EuiFormRow>
                         </EuiFlexItem>
-                        <EuiFlexItem grow={false}>
+                <EuiFlexItem grow={false}>
 
-                        <EuiFormRow
-                        label="Select level"
-                          >
-                            <EuiSelect
-                              hasNoInitialSelection
-                              options={[
-                                { value: 'option_one', text: 'High level' },
-                                { value: 'option_two', text: 'Standard level' },
-                              ]}
-                            />
+                  <EuiFormRow
+                  label="Select level"
+                    >
+                      <EuiSelect
+                        options={[
+                          { value: 'option_one', text: 'High level' },
+                          { value: 'option_two', text: 'Standard level' },
+                        ]}
+                        onChange={evt => dispatch(changeFormLevel(evt.target.value))}
+                        value={admin.level}
+                      />
 
-                          </EuiFormRow>
+                    </EuiFormRow>
                                   
+                </EuiFlexItem>
+                <EuiFlexItem grow={false}>
+                  <EuiFormRow label="Exam date" helpText="Exam date.">
+                      <EuiDatePicker selected={admin.fecha}                       
+                      onChange={evt => dispatch(changeFormDate(evt))
+                      } />
+                  </EuiFormRow>
+                </EuiFlexItem>
+                <EuiFlexItem grow={false}>
+                  <EuiFormRow label="Exam duration" helpText="Exam duration.">
+                      <EuiFieldNumber
+                        placeholder="Time in minutes"
+                        value={admin.duration}
+                         onChange={evt =>
+                          dispatch(changeFormDuration(evt.target.value))
+                          }
+                        aria-label="Use aria labels when no actual label is in use"
+                      />
+                  </EuiFormRow>
                 </EuiFlexItem>
               </EuiFlexGroup>
             </EuiForm>
           </EuiFlyoutBody>
-
-
-
-
           <EuiFlyoutFooter>
             <EuiFlexGroup justifyContent="spaceBetween">
               <EuiFlexItem grow={false}>

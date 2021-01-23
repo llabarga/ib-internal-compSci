@@ -3,13 +3,16 @@
  * Admin reducer
  *
  */
-
+import moment from 'moment';
 import produce from 'immer';
 import {
   CHANGE_FORM_NAME,
   CHANGE_FORM_SUBJECT,
   CHANGE_FORM_LEVEL,
   CHANGE_FORM_REFILL,
+  CHANGE_FORM_DESC,
+  CHANGE_FORM_DATE,
+  CHANGE_FORM_DURATION,
   RESET_FORM,
   LOAD_EXAMS_SUCCESS,
   LOAD_EXAMS_ERROR,
@@ -26,8 +29,10 @@ import {
 
 export const initialState = {
   name: 'Prueba',
-  subject: 'Maths',
-  level: 'NM',
+  description: 'Maths',
+  level: 'option_one',
+  duration: 60,
+  fecha: moment(),
   items: [
     {
     id:1,
@@ -263,6 +268,15 @@ const adminReducer = produce((draft, action) => {
       return;
     case CHANGE_FORM_SUBJECT:
       draft.subject = action.subject;
+      return;
+    case CHANGE_FORM_DESC:
+      draft.description = action.description;
+      return;      
+    case CHANGE_FORM_DURATION:
+      draft.duration = action.duration;
+      return;
+    case CHANGE_FORM_DATE:
+      draft.fecha = action.fecha;
       return;
     case CHANGE_FORM_LEVEL:
       draft.level = action.level;

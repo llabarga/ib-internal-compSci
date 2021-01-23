@@ -15,7 +15,10 @@
   */
  export const CHANGE_FORM_NAME = 'app/Exam/CHANGE_FORM_NAME';
  export const CHANGE_FORM_SUBJECT = 'app/Exam/CHANGE_FORM_SUBJECT';
+ export const CHANGE_FORM_DESC = 'app/Exam/CHANGE_FORM_DESC'; 
  export const CHANGE_FORM_LEVEL = 'app/Exam/CHANGE_FORM_LEVEL';
+ export const CHANGE_FORM_DATE = 'app/Exam/CHANGE_FORM_DATE'; 
+ export const CHANGE_FORM_DURATION = 'app/Exam/CHANGE_FORM_DURATION';
  export const CHANGE_FORM_REFILL = 'app/Exam/REFILL';
  export const RESET_FORM = 'app/Exam/RESET_FORM';
 
