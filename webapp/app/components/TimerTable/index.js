@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
@@ -18,6 +18,10 @@ import {
 
 import { FormattedMessage } from 'react-intl';
 import m from './messages';
+
+const onRowEdit = (t) => {console.log(t)}; 
+const onRowClone = (t) => {console.log(t)}; 
+const onRowDelete = (t) => {console.log(t)}; 
 
 const timers =[
   {
@@ -63,19 +67,68 @@ const columns = [
     name: 'Duración',
     sortable: true,
   },
+    {
+      name: 'Actions',
+      width: '20%',
+      actions: [
+        {
+          id: 'edit',
+          name: 'Edit',
+          description: 'Edit this exam',
+          icon: 'pencil',
+          type: 'icon',
+          isPrimary: true,
+          onClick: onRowEdit,
+        },
+        {
+          id: 'delete',
+          name: 'Delete',
+          description: 'Delete this exam',
+          icon: 'trash',
+          type: 'icon',
+          color: 'danger',
+          onClick: onRowDelete,
+        },
+      ],
+    },
 ];
+
+
+
 
 function TimerTable({items, onRowEdit, onRowClone, onRowDelete}) {
 
-  console.log(items);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
+  const [showPerPageOptions, setShowPerPageOptions] = useState(true);
+
+  const onTableChange = ({ page = {} }) => {
+    const { index: pageIndex, size: pageSize } = page;
+
+    setPageIndex(pageIndex);
+    setPageSize(pageSize);
+  };
+
+  const totalItemCount = items.length;
+
+  const pagination = {
+    pageIndex,
+    pageSize,
+    totalItemCount,
+    pageSizeOptions: [3, 5, 8],
+    hidePerPageOptions: !showPerPageOptions,
+  };
+
   return (
     <>
     <div>
       <FormattedMessage {...m.header} />
     </div>
     <EuiBasicTable
-      items={items}
+      items={items.slice(pageIndex*pageSize, pageIndex*pageSize+pageSize)}
       columns={columns}
+      pagination={pagination}
+      onChange={onTableChange}
     />
     </>
   );

@@ -35,6 +35,7 @@ import {
   EuiCheckboxGroup,
   EuiSelect,
   EuiDatePicker,
+  EuiFilePicker,
 } from '@elastic/eui';
 
 
@@ -76,6 +77,8 @@ function Admin() {
   console.log(admin);
 
   const [isOpen, setOpen] = useState(false);
+  const [isOpenFiles, setOpenFiles] = useState(false);
+  const [files, setFiles] = useState({});
 
   const closeForm = () => {
     setOpen(false);
@@ -102,6 +105,7 @@ function Admin() {
     setChecked(e.target.checked);
   };
 
+
   return (
     <div>
       <Helmet>
@@ -120,6 +124,15 @@ function Admin() {
             style={{ marginRight: '10px' }}
           >
             New timer
+          </EuiButton>
+
+          <EuiButton
+            onClick={() => setOpenFiles(true)}
+            iconType="listAdd"
+            size="s"
+            style={{ marginRight: '10px' }}
+          >
+            Upload file
           </EuiButton>
         </div>
       </EuiFlexItem>
@@ -226,6 +239,62 @@ function Admin() {
                 <EuiButtonEmpty
                   iconType="cross"
                   onClick={closeForm}
+                  flush="left"
+                >
+                  Close
+                </EuiButtonEmpty>
+              </EuiFlexItem>
+              <EuiFlexItem grow={false}>
+                <EuiButton onClick={onSave} fill>
+                  Save
+                </EuiButton>
+              </EuiFlexItem>
+            </EuiFlexGroup>
+          </EuiFlyoutFooter>
+        </EuiFlyout>
+      ) : (
+        undefined
+      )}
+
+       {isOpenFiles ? (
+        <EuiFlyout
+          onClose={() => setOpenFiles(false)}
+          aria-labelledby="flyoutTitle"
+          hideCloseButton
+        >
+          <EuiFlyoutHeader hasBorder>
+            <EuiTitle size="m">
+              <h2 id="flyoutTitle">Define timer</h2>
+            </EuiTitle>
+          </EuiFlyoutHeader>
+          <EuiFlyoutBody>
+            <EuiText>
+              <p>Define the parameters for your timer</p>
+            </EuiText>
+            <EuiSpacer />
+            <EuiForm>
+              <EuiFlexGroup style={{ maxWidth: 600 }} direction="column">
+                <EuiFlexItem grow={false}>
+                  <EuiFormRow label="Exam list" helpText="Exam list.">
+                   <EuiFilePicker
+                    id="asdf2"
+                    initialPromptText="Select or drag and drop a file with exams"
+                    onChange={(files) => {
+                      setFiles(files);
+                    }}
+                    aria-label="Use aria labels when no actual label is in use"
+                  />
+                  </EuiFormRow>
+                </EuiFlexItem>
+              </EuiFlexGroup>
+            </EuiForm>
+          </EuiFlyoutBody>
+          <EuiFlyoutFooter>
+            <EuiFlexGroup justifyContent="spaceBetween">
+              <EuiFlexItem grow={false}>
+                <EuiButtonEmpty
+                  iconType="cross"
+                  onClick={() => setOpenFiles(false)}
                   flush="left"
                 >
                   Close
