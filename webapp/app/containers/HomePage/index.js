@@ -36,7 +36,7 @@ export function HomePage() {
       <EuiFlexGroup>
         <EuiFlexItem>
 
-              Hola me llamo leyre
+              Welcome to Pomidor
 
         </EuiFlexItem>
       </EuiFlexGroup>

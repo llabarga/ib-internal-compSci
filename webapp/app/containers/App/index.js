@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import HomePage from 'containers/HomePage/Loadable';
 import Admin from 'containers/Admin/Loadable';
+import Login from 'containers/Login/Loadable';
 import Visual from 'containers/Visual/Loadable';
 import Nav from 'containers/Nav';
 import AppWrapper from 'components/AppWrapper';
@@ -48,6 +49,7 @@ export function App() {
           <Route exact path="/" component={HomePage} />
           <Route path="/Admin" component={Admin} />
           <Route path="/Visual" component={Visual} />
+          <Route path="/Login" component={Login} />
           <Route component={NotFoundPage} />
         </Switch>
       </AppWrapper>
