@@ -105,6 +105,47 @@ function Admin() {
     setChecked(e.target.checked);
   };
 
+  const csvJSON = (csv) => {
+
+    var lines=csv.split("\n");
+
+    var result = [];
+
+    // NOTE: If your columns contain commas in their values, you'll need
+    // to deal with those before doing the next step 
+    // (you might convert them to &&& or something, then covert them back later)
+    // jsfiddle showing the issue https://jsfiddle.net/
+    var headers=lines[0].split(",");
+
+    for(var i=1;i<lines.length;i++){
+
+        var obj = {};
+        var currentline=lines[i].split(",");
+
+        for(var j=0;j<headers.length;j++){
+            obj[headers[j].replace(/^["'](.+(?=["']$))["']$/, '$1')] = currentline[j].replace(/^["'](.+(?=["']$))["']$/, '$1');
+        }
+
+        result.push(obj);
+
+    }
+
+    //return result; //JavaScript object
+    return JSON.stringify(result); //JSON
+  }
+
+
+  const loadFiles = (files)=>  {
+    var file = files[0];
+    var reader = new FileReader();
+    reader.onload = function(event) {
+      // The file's text will be printed here
+
+      console.log(csvJSON(event.target.result))
+    };
+
+    reader.readAsText(file);
+  }
 
   return (
     <div>
@@ -280,7 +321,7 @@ function Admin() {
                     id="asdf2"
                     initialPromptText="Select or drag and drop a file with exams"
                     onChange={(files) => {
-                      setFiles(files);
+                      loadFiles(files);
                     }}
                     aria-label="Use aria labels when no actual label is in use"
                   />
