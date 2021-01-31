@@ -25,19 +25,19 @@ export function HomePage() {
         <EuiFlexItem>
           <EuiDescriptionList>
             <EuiDescriptionListTitle>
-              <FormattedMessage {...m.help} />
+            Welcome to Pomidor!
             </EuiDescriptionListTitle>
             <EuiDescriptionListDescription>
-              <FormattedMessage {...m.helpInfo} />
+
             </EuiDescriptionListDescription>
           </EuiDescriptionList>
         </EuiFlexItem>
       </EuiFlexGroup>
       <EuiFlexGroup>
         <EuiFlexItem>
-
-              Hola me llamo leyre
-
+              Use the menu to navigate through the app.
+              Try creating a new timer in Admin and take a look
+              in Visual.
         </EuiFlexItem>
       </EuiFlexGroup>
     </Page>

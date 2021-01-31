@@ -134,8 +134,15 @@ export function Nav() {
     },
   ];
 
+  const logInfo = [
+    {
+      label: 'Enter',
+      iconType: 'lockOpen',
+      onClick: () => history.push('/Login'),
+    },
+  ];
 
-  const menu = [settings, timers, timerCards];
+  const menu = [settings, timers, timerCards, logInfo];
 
   return (
     <Header

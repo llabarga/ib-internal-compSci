@@ -106,7 +106,7 @@ function TimerCard({item}) {
   return (
     <>
     <EuiCard
-     icon={<EuiIcon size="xl" type={`logo${item.icon}`} />}
+     icon={<EuiIcon size="l" type={`logo${item.icon}`} />}
      title={item.subject}
      isDisabled={item.icon === 'Kibana' ? true : false}
      description={item.name + "  "+ timeString(timeLeft) + " " + item.level}
