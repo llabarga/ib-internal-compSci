@@ -19,6 +19,8 @@ import {
   EuiFlexItem,
   EuiButton,
   EuiButtonGroup,
+  EuiTitle,
+  EuiTextColor,
 } from '@elastic/eui';
 
 import { htmlIdGenerator } from '@elastic/eui/lib/services';
@@ -106,20 +108,32 @@ function TimerCard({item}) {
   return (
     <>
     <EuiCard
-     icon={<EuiIcon size="l" type={`logo${item.icon}`} />}
      title={item.subject}
      isDisabled={item.icon === 'Kibana' ? true : false}
-     description={item.name + "  "+ timeString(timeLeft) + " " + item.level}
-     onClick={() => window.alert('Timeout')}
+     icon={<EuiIcon size="xl" type={`logo${item.icon}`} />}
+     description={
+      <>
+      <EuiTitle>
+        <h2>
+          <EuiTextColor color="default"> {item.name} </EuiTextColor>
+          <EuiTextColor color="default">{timeString(timeLeft)} </EuiTextColor>
+          <EuiTextColor color="default">{item.level} </EuiTextColor>
+        </h2>
+      </EuiTitle>
+
+       <EuiButtonGroup
+         legend="Text align"
+         name="textAlign"
+         options={toggleButtonsIcons}
+         idSelected={toggleIconIdSelected}
+         onChange={id => onChangeIcons(id)}
+         isIconOnly
+       />
+     </>
+     }
+    
     />
-    <EuiButtonGroup
-      legend="Text align"
-      name="textAlign"
-      options={toggleButtonsIcons}
-      idSelected={toggleIconIdSelected}
-      onChange={id => onChangeIcons(id)}
-      isIconOnly
-    />
+
     <audio ref={audio} id="beep" preload="auto" src="https://soundbible.com/grab.php?id=1746&type=mp3" />
 
     </>
