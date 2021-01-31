@@ -69,8 +69,6 @@ function Visual() {
      <Page title={<FormattedMessage {...m.header} />}>
        <>
 
-       These are your timers!
-
        <EuiFlexGrid gutterSize="l" columns={2}>{cardNodes}</EuiFlexGrid>
 
 
