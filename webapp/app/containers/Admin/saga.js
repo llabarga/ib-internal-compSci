@@ -37,6 +37,12 @@ function uuidv4() {
   });
 }
 
+
+const randomIcon = () => {
+  const icons = ['Kibana', 'Cloud', 'Maps', 'Observability',];
+  return `logo${icons[Math.floor(Math.random() * icons.length)]}`;
+}
+
 /*
  * Creates a cohort in the database
  */
@@ -158,15 +164,17 @@ export function* examSaveFlow() {
     description,
     level,
     duration,
-    fecha
+    fecha,
+    icon: randomIcon(),
   };
 
   if (currentlyEditing) {
     const id = { id: currentlyEditing };
     timer = { ...timer, ...id, updated_at: now.toISOString() };
-    console.log('Updating ...')
     yield updateTimer(timer);
   } else {
+  
+    console.log(timer);
     yield createTimer(timer);
   }
   yield put(resetForm());

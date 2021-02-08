@@ -55,11 +55,6 @@ function TimerCard({item}) {
   );
 
 
-  const randomIcon = () => {
-    const icons = ['Kibana', 'Cloud', 'Maps', 'Observability',];
-    return `logo${icons[Math.floor(Math.random() * icons.length)]}`;
-  }
-
   const timeString = (seconds) => {
     var date = new Date(0);
     date.setSeconds(seconds);
@@ -115,8 +110,8 @@ function TimerCard({item}) {
     <>
     <EuiCard
      title={item.subject}
-     isDisabled={item.icon === 'Kibana' ? true : false}
-     icon={<EuiIcon size="xl" type={randomIcon()} />}
+     isDisabled={false}
+     icon={<EuiIcon size="xl" type={item.icon} />}
      description={
       <>
       <EuiTitle>

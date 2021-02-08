@@ -28,10 +28,14 @@ import saga from './saga';
 import m from './messages';
 import Page from 'components/Page';
 import TimerCard from 'components/TimerCard';
+
+
 const stateSelector = createStructuredSelector({
   visual: makeSelectVisual(),
   admin: makeSelectAdmin(),
 });
+
+
 
 function Visual() {
   useInjectReducer({ key: 'visual', reducer });
@@ -52,7 +56,6 @@ function Visual() {
   //   }, 1000);
   // });
 
-  const icons = ['Beats', 'Cloud', 'Logging', 'Kibana'];
 
   const ITEM_STYLE = { width: '300px' };
   const cardNodes = admin.items.map(function(item, index) {

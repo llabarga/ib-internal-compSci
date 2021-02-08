@@ -47,7 +47,7 @@ export const initialState = {
     level: 'NM',
     duration: 75,
     readingTime: false,
-    icon:'Cloud',
+    icon:'logoCloud',
   },
 
   {
@@ -58,7 +58,7 @@ export const initialState = {
     level: 'NS',
     duration: 10,
     readingTime: true,
-    icon:'Kibana',
+    icon:'logoKibana',
   },
 ],
 
