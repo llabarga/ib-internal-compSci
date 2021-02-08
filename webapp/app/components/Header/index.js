@@ -20,11 +20,19 @@ import {
   EuiHeaderSectionItem,
   EuiHeaderBreadcrumbs,
   EuiHeaderSectionItemButton,
+  EuiHeaderLinks,
+  EuiHeaderLink,
   EuiIcon,
   EuiShowFor,
+  EuiText,
 } from '@elastic/eui';
 
 import logo from './sarria.svg';
+
+
+import { createStructuredSelector } from 'reselect';
+import { useSelector, useDispatch } from 'react-redux';
+import makeSelectLogin from 'containers/Login/selectors';
 
 const FixedEuiHeader = styled(EuiHeader)`
   position: fixed;
@@ -48,6 +56,12 @@ export default function Header({
     projects,
     user
   } = app;
+
+  const stateSelector = createStructuredSelector({
+    login: makeSelectLogin(),
+  });
+
+  const { login } = useSelector(stateSelector);
 
 
     return(
@@ -73,7 +87,6 @@ export default function Header({
               </Link>
             </EuiHeaderSectionItem>
             <EuiHeaderSectionItem border="right">
-
             </EuiHeaderSectionItem>
           </EuiHeaderSection>
           <EuiHeaderBreadcrumbs
@@ -83,7 +96,17 @@ export default function Header({
             truncate={false} />
           <EuiHeaderSection side="right">
             <EuiHeaderSectionItem>
-
+            <EuiHeaderLinks aria-label="App navigation links example">
+              <EuiHeaderLink iconType="user">
+               { login.logged ? (
+                  <EuiText><p>{login.name}</p></EuiText>
+                ) : (undefined)
+                }</EuiHeaderLink>
+            </EuiHeaderLinks>
+           
+            </EuiHeaderSectionItem>
+            <EuiHeaderSectionItem>
+            { ' ' }
             </EuiHeaderSectionItem>
           </EuiHeaderSection>
         </FixedEuiHeader>

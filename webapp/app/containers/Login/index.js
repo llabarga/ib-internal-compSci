@@ -37,6 +37,10 @@ import {
   EuiFlexGrid,
 } from '@elastic/eui';
 
+import {
+    doLogin,
+} from "./actions";
+
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectLogin from './selectors';
@@ -47,8 +51,7 @@ const stateSelector = createStructuredSelector({
 });
 
 
- export function Login() {
-
+export function Login() {
 
   useInjectReducer({ key: 'login', reducer });
   useInjectSaga({ key: 'login', saga });
@@ -60,7 +63,7 @@ const stateSelector = createStructuredSelector({
 
   const [isFlyoutVisible, setIsFlyoutVisible] = useState(false);
 
-  const [value, setValue] = useState('');
+  const [logged, setLogged] = useState(false);
 
   const onChange = (e) => {
     setValue(e.target.value);
@@ -71,7 +74,10 @@ const stateSelector = createStructuredSelector({
   const showFlyout = () => setIsFlyoutVisible(true);
 
   
-  const handleLogin = () => console.log('Login');
+  const handleLogin = () => {
+    console.log('doLogin');
+    dispatch(doLogin());
+  }
   
   const failedForm = false;
   const errors = [];
@@ -100,7 +106,7 @@ const stateSelector = createStructuredSelector({
                 placeholder="Nombre"
                 value={login.displayName}
                 prepend={<EuiIcon type="user" />}
-                onChange={handleLogin}
+                //onChange={handleLogin}
                 aria-label="Nombre"
               />
             </EuiFormRow>
@@ -109,7 +115,7 @@ const stateSelector = createStructuredSelector({
                 placeholder="Email"
                 value={login.email}
                 prepend={<EuiIcon type="email" />}
-                onChange={handleLogin}
+                //onChange={handleLogin}
                 aria-label="Email"
               />
             </EuiFormRow>
@@ -117,7 +123,7 @@ const stateSelector = createStructuredSelector({
               <EuiFieldPassword
                 placeholder="Contraseña"
                 value={login.password}
-                onChange={handleLogin}
+                //onChange={handleLogin}
                 aria-label="Contraseña"
               />
             </EuiFormRow>
@@ -125,7 +131,7 @@ const stateSelector = createStructuredSelector({
               <EuiFieldPassword
                 placeholder="Confirmar contraseña"
                 value={login.confirmPassword}
-                onChange={handleLogin}
+                //onChange={handleLogin}
                 aria-label="Confirmar contraseña"
               />
             </EuiFormRow>
@@ -175,7 +181,7 @@ const stateSelector = createStructuredSelector({
         </EuiFormRow>
         <EuiSpacer size="m" />
         <EuiButton
-          onClick={(evt) => history.push('/Admin')}
+          onClick={handleLogin}
           // onClick={(evt) => {
           //   if (evt !== undefined && evt.preventDefault) {
           //     evt.preventDefault();

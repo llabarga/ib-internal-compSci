@@ -215,10 +215,6 @@ function Admin() {
             </EuiTitle>
           </EuiFlyoutHeader>
           <EuiFlyoutBody>
-            <EuiText>
-              <p>Define the parameters for your timer</p>
-            </EuiText>
-            <EuiSpacer />
             <EuiForm>
               <EuiFlexGroup style={{ maxWidth: 600 }} direction="column">
                 <EuiFlexItem grow={false}>
@@ -234,10 +230,10 @@ function Admin() {
                   </EuiFormRow>
                 </EuiFlexItem>
                 <EuiFlexItem grow={false}>
-                  <EuiFormRow label="Exam name" helpText="Exam name.">
+                  <EuiFormRow label="Exam subject" helpText="Exam subject.">
                     <EuiFieldText
                       name="name"
-                      placeholder="Exam name"
+                      placeholder="Subject"
                       onChange={evt =>
                         dispatch(changeFormSubject(evt.target.value))
                       }
@@ -246,21 +242,6 @@ function Admin() {
                   </EuiFormRow>
                 </EuiFlexItem>
 
-                <EuiFlexItem grow={false}>
-                  <EuiFormRow
-                    label="Description"
-                    helpText="A comprehensive description of your exam."
-                  >
-                    <EuiTextArea
-                      name="description"
-                      placeholder="A comprehensive description of your exam"
-                      onChange={evt =>
-                        dispatch(changeFormDesc(evt.target.value))
-                      }
-                      value={admin.description}
-                      />
-                        </EuiFormRow>
-                        </EuiFlexItem>
                 <EuiFlexItem grow={false}>
 
                   <EuiFormRow

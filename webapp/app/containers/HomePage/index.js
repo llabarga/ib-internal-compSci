@@ -5,7 +5,7 @@
  *
  */
 
-import React from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   EuiDescriptionListTitle,
@@ -18,7 +18,28 @@ import {
 import Page from 'components/Page';
 import m from './messages';
 
+import { createStructuredSelector } from 'reselect';
+import { useSelector, useDispatch } from 'react-redux';
+import makeSelectLogin from '../Login/selectors';
+import history from 'utils/history';
+
+
+
 export function HomePage() {
+
+  const stateSelector = createStructuredSelector({
+    login: makeSelectLogin(),
+  });
+
+  const { login } = useSelector(stateSelector);
+
+  useEffect(() => {
+
+    
+    if (!login.logged) history.push('/Login');
+
+  });
+
   return (
     <Page title={<FormattedMessage {...m.pageName} />}>
       <EuiFlexGroup>

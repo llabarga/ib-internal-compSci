@@ -23,6 +23,7 @@ import {
   examUpdateSuccess,
   examUpdateError,
   examCreateError,
+  examDeleteError,
   resetForm,
   loadItemsSuccess,
 } from './actions';
@@ -174,7 +175,7 @@ export function* examSaveFlow() {
 /*
  * Creates or updates a new cohort
  */
-export function* examDeleteFlow() {
+export function* examDeleteFlow(action) {
   try {
     // const extraHeaders = {
     //   Prefer: 'resolution=merge-duplicates,return=representation',
@@ -183,15 +184,16 @@ export function* examDeleteFlow() {
     // if (resp.status === 204) {
     if (true) {
       yield put(
-        examDeleteSuccess(exam.id, {
-          title: `Exam ${exam.id} succesfully deleted.`,
+        examDeleteSuccess(action.item.id, {
+          title: `Exam ${action.item.id} succesfully deleted.`,
         }),
       );
     } else {
       throw new Error(resp.body.message);
     }
   } catch (error) {
-    yield put(cohortDeleteError(error.message));
+    console.log(error);
+    yield put(examDeleteError(error.message));
   }
 }
 
