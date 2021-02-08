@@ -1,10 +1,7 @@
 /*
  *
- * Admin constants
+ * Login constants
  *
  */
 
- /*
-  * Load exams into table
-  */
- 
+export const DEFAULT_ACTION = "app/Login/DEFAULT_ACTION";

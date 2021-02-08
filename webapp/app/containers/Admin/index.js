@@ -51,6 +51,8 @@ import {
   examDelete,
   refill,
   resetForm,
+  loadItems,
+  loadFile,
 } from './actions';
 
 import { useInjectSaga } from 'utils/injectSaga';
@@ -74,8 +76,6 @@ function Admin() {
   const dispatch = useDispatch();
   /* eslint-enable no-unused-vars */
 
-  console.log(admin);
-
   const [isOpen, setOpen] = useState(false);
   const [isOpenFiles, setOpenFiles] = useState(false);
   const [files, setFiles] = useState({});
@@ -90,7 +90,7 @@ function Admin() {
   };
   const onSave = () => {
     setOpen(false);
-    //dispatch(resetForm());
+    dispatch(examSave());
   };
 
   const onCreate = () => {
@@ -98,6 +98,20 @@ function Admin() {
     // This resets the form
     dispatch(resetForm());
   };
+
+  const onRowEdit = item => {
+    setOpen(!isOpen);
+    dispatch(refill(item.id));
+  };
+
+  const onRowDelete = item => {
+    dispatch(examDelete(item));
+  };
+
+  const onLoadFile = () => {
+    dispatch(loadItems());
+    setOpenFiles(false);
+  }
 
   const [checked] = useState(false);
 
@@ -130,8 +144,9 @@ function Admin() {
 
     }
 
-    //return result; //JavaScript object
-    return JSON.stringify(result); //JSON
+    return result; //JavaScript object
+    //return JSON.stringify(result); //JSON
+
   }
 
 
@@ -142,6 +157,7 @@ function Admin() {
       // The file's text will be printed here
 
       console.log(csvJSON(event.target.result))
+      dispatch(loadFile(csvJSON(event.target.result)));
     };
 
     reader.readAsText(file);
@@ -181,9 +197,8 @@ function Admin() {
         <EuiFlexItem>
           <TimerTable
             items={admin.items}
-            onRowEdit={openForm}
-            onRowClone={openForm}
-            onRowDelete={openForm}
+            onRowEdit={onRowEdit}
+            onRowDelete={onRowDelete}
           />
         </EuiFlexItem>
       </EuiFlexGroup>
@@ -218,7 +233,18 @@ function Admin() {
                     />
                   </EuiFormRow>
                 </EuiFlexItem>
-
+                <EuiFlexItem grow={false}>
+                  <EuiFormRow label="Exam name" helpText="Exam name.">
+                    <EuiFieldText
+                      name="name"
+                      placeholder="Exam name"
+                      onChange={evt =>
+                        dispatch(changeFormSubject(evt.target.value))
+                      }
+                      value={admin.subject}
+                    />
+                  </EuiFormRow>
+                </EuiFlexItem>
 
                 <EuiFlexItem grow={false}>
                   <EuiFormRow
@@ -342,7 +368,7 @@ function Admin() {
                 </EuiButtonEmpty>
               </EuiFlexItem>
               <EuiFlexItem grow={false}>
-                <EuiButton onClick={onSave} fill>
+                <EuiButton onClick={onLoadFile} fill>
                   Save
                 </EuiButton>
               </EuiFlexItem>

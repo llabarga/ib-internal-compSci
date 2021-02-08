@@ -19,6 +19,9 @@
  export const CHANGE_FORM_LEVEL = 'app/Exam/CHANGE_FORM_LEVEL';
  export const CHANGE_FORM_DATE = 'app/Exam/CHANGE_FORM_DATE'; 
  export const CHANGE_FORM_DURATION = 'app/Exam/CHANGE_FORM_DURATION';
+ export const CHANGE_FORM_LOAD = 'app/Exam/CHANGE_FORM_LOAD';
+ export const LOAD_ITEMS = 'app/Exam/LOAD_ITEMS'; 
+ export const LOAD_ITEMS_SUCCESS = 'app/Exam/LOAD_ITEMS_SUCCESS'; 
  export const CHANGE_FORM_REFILL = 'app/Exam/REFILL';
  export const RESET_FORM = 'app/Exam/RESET_FORM';
 

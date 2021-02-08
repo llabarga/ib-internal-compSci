@@ -13,6 +13,8 @@ import {
   CHANGE_FORM_DESC,
   CHANGE_FORM_DATE,
   CHANGE_FORM_DURATION,
+  CHANGE_FORM_LOAD,
+  LOAD_ITEMS_SUCCESS,
   RESET_FORM,
   LOAD_EXAMS_SUCCESS,
   LOAD_EXAMS_ERROR,
@@ -29,17 +31,21 @@ import {
 
 export const initialState = {
   name: 'Prueba',
+  subject: 'Maths',
   description: 'Maths',
-  level: 'option_one',
+  level: 'NS',
   duration: 60,
+  readingTime: false,
   fecha: moment(),
+  newItems: [],
   items: [
     {
     id:1,
     name: 'Prueba 1',
+    description: 'Lengua B',
     subject: 'Lengua B',
     level: 'NM',
-    length: 75,
+    duration: 75,
     readingTime: false,
     icon:'Cloud',
   },
@@ -47,202 +53,12 @@ export const initialState = {
   {
     id:2,
     name: 'Prueba 2',
+    description: 'Lengua B',
     subject: 'Lengua B',
     level: 'NS',
-    length: 10,
+    duration: 10,
     readingTime: true,
     icon:'Kibana',
-  },
-
-  {
-    id:3,
-    name: 'Prueba 1',
-    subject: 'Biología',
-    level: 'NS/NM',
-    length: 45,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:4,
-    name: 'Prueba 2',
-    subject: 'Biología',
-    level: 'NS/NM',
-    length: 75,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:5,
-    name: 'Prueba 1',
-    subject: 'Física',
-    level: 'NS/NM',
-    length: 45,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:6,
-    name: 'Prueba 2',
-    subject: 'Física',
-    level: 'NS/NM',
-    length: 75,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:7,
-    name: 'Prueba 1',
-    subject: 'Filosofía',
-    level: 'NS/NM',
-    length: 60,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:8,
-    name: 'Prueba 2',
-    subject: 'Filosofía',
-    level: 'NS/NM',
-    length: 60,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:9,
-    name: 'Prueba 3',
-    subject: 'Filosofía',
-    level: 'NS/NM',
-    length: 75,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:10,
-    name: 'Prueba 1',
-    subject: 'Historia',
-    level: 'NS/NM',
-    length: 60,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:11,
-    name: 'Prueba 2',
-    subject: 'Historia',
-    level: 'NS/NM',
-    length: 45,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:12,
-    name: 'Prueba 1',
-    subject: 'Matemáticas',
-    level: 'NS/NM',
-    length: 90,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:13,
-    name: 'Prueba 2',
-    subject: 'Matemáticas',
-    level: 'NS/NM',
-    length: 90,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:14,
-    name: 'Prueba 3',
-    subject: 'Matemáticas',
-    level: 'NS',
-    length: 60,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-
-  {
-    id:15,
-    name: 'Prueba 1',
-    subject: 'Computer Science',
-    level: 'NM',
-    length: 90,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:16,
-    name: 'Prueba 3',
-    subject: 'Computer Science',
-    level: 'NS',
-    length: 60,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:17,
-    name: 'Prueba 1',
-    subject: 'Gestión Empresarial',
-    level: 'NM',
-    length: 75,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:18,
-    name: 'Prueba 2',
-    subject: 'Gestión Empresarial',
-    level: 'NM',
-    length: 75,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:19,
-    name: 'Prueba 1',
-    subject: 'Química',
-    level: 'NS/NM',
-    length: 45,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:20,
-    name: 'Prueba 2',
-    subject: 'Química',
-    level: 'NS/NM',
-    length: 75,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:21,
-    name: 'Prueba 1',
-    subject: 'Lengua A',
-    level: 'NM',
-    length: 90,
-    readingTime: false,
-    icon:'Cloud',
   },
 ],
 
@@ -250,6 +66,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const adminReducer = produce((draft, action) => {
+  console.log(action.type);
   switch (action.type) {
     case LOAD_EXAMS_SUCCESS:
       draft.items = action.examList;
@@ -260,8 +77,28 @@ const adminReducer = produce((draft, action) => {
       draft.message = 'No exams match search criteria';
       return;
     case EXAM_CREATE_SUCCESS:
+      console.log(action.exam);
       draft.currentlyEditing = '';
       draft.items.push(action.exam);
+      return;
+    case EXAM_UPDATE_SUCCESS:
+      draft.items = draft.items.map(item => {
+        // Find the item with the matching id
+        if (item.id === draft.currentlyEditing) {
+          // Return a new object
+          return {
+            ...action.exam,
+          };
+        }
+        // Leave every other item unchanged
+        return item;
+      });
+      return;
+    case EXAM_DELETE_SUCCESS:
+      draft.items.splice(
+        draft.items.findIndex(c => c.id === action.id),
+        1,
+      );
       return;
     case CHANGE_FORM_NAME:
       draft.name = action.name;
@@ -281,19 +118,32 @@ const adminReducer = produce((draft, action) => {
     case CHANGE_FORM_LEVEL:
       draft.level = action.level;
       return;
+    case CHANGE_FORM_LOAD:
+      draft.newItems = action.newItems;
+      return;      
+    case LOAD_ITEMS_SUCCESS:
+      draft.items = [...draft.items, ...action.newItems];
+      draft.newItems = []
+      return;     
     case CHANGE_FORM_REFILL:
       const item = draft.items.find(it => it.id === action.itemId);
       draft.currentlyEditing = item.id;
       draft.name = item.name;
       draft.subject = item.subject;
       draft.level = item.level;
+      draft.duration = item.duration;
+      draft.description = item.description;
       return;
     case RESET_FORM:
       draft.currentlyEditing = initialState.currentlyEditing;
       draft.name = initialState.name;
       draft.subject = initialState.subject;
       draft.level = initialState.level;
-        return;
+      draft.duration = initialState.duration;
+      draft.description = initialState.description;
+      return;
+    case EXAM_UPDATE_SUCCESS:
+      return;
   }
 }, initialState);
 

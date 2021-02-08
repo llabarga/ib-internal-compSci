@@ -24,7 +24,7 @@ import {
   EuiShowFor,
 } from '@elastic/eui';
 
-import logo from './logo.svg';
+import logo from './sarria.svg';
 
 const FixedEuiHeader = styled(EuiHeader)`
   position: fixed;

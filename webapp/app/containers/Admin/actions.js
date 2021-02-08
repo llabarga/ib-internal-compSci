@@ -13,6 +13,9 @@
    CHANGE_FORM_DESC,
    CHANGE_FORM_DATE,
    CHANGE_FORM_DURATION,
+   CHANGE_FORM_LOAD,
+   LOAD_ITEMS,
+   LOAD_ITEMS_SUCCESS,
    RESET_FORM,
    LOAD_EXAMS_SUCCESS,
    LOAD_EXAMS_ERROR,
@@ -101,6 +104,23 @@
  }
 
  /**
+  * Sets the data back into the form
+  * @param  {int} represent the exam id
+  */
+ export function loadFile(newItems) {
+   return { type: CHANGE_FORM_LOAD, newItems };
+ }
+
+ export function loadItems() {
+   return { type: LOAD_ITEMS };
+ }
+
+ export function loadItemsSuccess(newItems) {
+   return { type: LOAD_ITEMS_SUCCESS, newItems };
+ }
+
+
+ /**
   * Resets the form
   */
  export function resetForm() {
@@ -135,8 +155,8 @@
   * Updates a exam in the table
   * @param  {Object} represents a new exam with all the data
   */
- export function examUpdateSuccess(exam, toast) {
-   return { type: EXAM_UPDATE_SUCCESS, exam, toast };
+ export function examUpdateSuccess(exam) {
+   return { type: EXAM_UPDATE_SUCCESS, exam, toast:  { text: 'Success!' } };
  }
 
  export function examUpdateError(msg) {

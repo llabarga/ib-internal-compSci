@@ -82,18 +82,6 @@ export function Nav() {
   const breadCrumbs = () => splitUrl(location.pathname);
 
 
-  const internalApps = [
-    {
-      label: 'ETL',
-      iconType: 'training',
-    },
-    {
-      label: 'Concept mapping',
-      onClick: () => history.push('/Internal/ConceptMapper'),
-      iconType: 'indexMapping',
-    },
-  ];
-
   const settings = [
     {
       label: 'Settings',
@@ -121,7 +109,7 @@ export function Nav() {
   const timers = [
     {
       label: 'Timers',
-      iconType: 'clock',
+      iconType: 'tableDensityExpanded',
       onClick: () => history.push('/Admin'),
     },
   ];
@@ -129,7 +117,7 @@ export function Nav() {
   const timerCards = [
     {
       label: 'Cards',
-      iconType: 'tableDensityExpanded',
+      iconType: 'clock',
       onClick: () => history.push('/Visual'),
     },
   ];
@@ -142,7 +130,7 @@ export function Nav() {
     },
   ];
 
-  const menu = [settings, timers, timerCards, logInfo];
+  const menu = [ timers, timerCards, ];
 
   return (
     <Header

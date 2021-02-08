@@ -54,6 +54,12 @@ function TimerCard({item}) {
     `${idPrefix3}0`
   );
 
+
+  const randomIcon = () => {
+    const icons = ['Kibana', 'Cloud', 'Maps', 'Observability',];
+    return `logo${icons[Math.floor(Math.random() * icons.length)]}`;
+  }
+
   const timeString = (seconds) => {
     var date = new Date(0);
     date.setSeconds(seconds);
@@ -61,7 +67,7 @@ function TimerCard({item}) {
   }
 
   const [timer, setTimer] = useState();
-  const [timeLeft, setTimeLeft] = useState(item.length*60);
+  const [timeLeft, setTimeLeft] = useState(item.duration*60);
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
@@ -110,7 +116,7 @@ function TimerCard({item}) {
     <EuiCard
      title={item.subject}
      isDisabled={item.icon === 'Kibana' ? true : false}
-     icon={<EuiIcon size="xl" type={`logo${item.icon}`} />}
+     icon={<EuiIcon size="xl" type={randomIcon()} />}
      description={
       <>
       <EuiTitle>
