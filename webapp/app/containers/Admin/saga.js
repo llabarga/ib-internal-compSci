@@ -12,9 +12,9 @@ import {
 
 import {
   EXAM_SAVE,
-  EXAM_SAVE_SUCCESS,
   EXAM_DELETE,
   LOAD_ITEMS,
+  LOAD_EXAMS,
 } from './constants';
 
 import {
@@ -26,6 +26,7 @@ import {
   examDeleteError,
   resetForm,
   loadItemsSuccess,
+  loadExamsSuccess,
 } from './actions';
 
 import makeSelectAdmin from './selectors';
@@ -41,6 +42,18 @@ function uuidv4() {
 const randomIcon = () => {
   const icons = ['Kibana', 'Cloud', 'Maps', 'Observability',];
   return `logo${icons[Math.floor(Math.random() * icons.length)]}`;
+}
+
+
+/*
+ * Creates a cohort in the database
+ */
+export function* loadExams() {
+  
+  let timers = JSON.parse(localStorage.getItem('timers'));
+
+  yield put(loadExamsSuccess(timers));
+
 }
 
 /*
@@ -77,7 +90,19 @@ export function* createTimer(timer) {
     //   );
 
     if (true) {
-      yield put(examCreateSuccess({ ...timer, id: uuidv4() }));
+
+      const newTimer = { ...timer, id: uuidv4() }  
+      let timers = JSON.parse(localStorage.getItem('timers'));
+
+      if (timers) {
+        timers.push(newTimer);
+      } else {
+        timers = [newTimer]; 
+      }
+
+      localStorage.setItem('timers', JSON.stringify(timers));
+
+      yield put(examCreateSuccess(newTimer));
     } else {
       throw new Error(resp.body.message);
     }
@@ -136,6 +161,23 @@ export function* updateTimer(timer) {
 
     //   yield all(allCalls);
 
+
+    let timers = JSON.parse(localStorage.getItem('timers'));
+
+    timers = timers.map(item => {
+      // Find the item with the matching id
+      if (item.id === timer.id) {
+        // Return a new object
+        return {
+          ...timer,
+        };
+      }
+      // Leave every other item unchanged
+      return item;
+    });
+
+    localStorage.setItem('timers', JSON.stringify(timers));
+
     if (true) {
 
       yield put(examUpdateSuccess(timer));
@@ -156,6 +198,7 @@ export function* examSaveFlow() {
     makeSelectAdmin(),
   );
 
+  console.log('llega hasta aqui');
   const now = new Date();
 
   let timer = {
@@ -190,6 +233,17 @@ export function* examDeleteFlow(action) {
     // };
     // const resp = yield call(PATCH, '/cohort', cohort, extraHeaders);
     // if (resp.status === 204) {
+
+
+    let timers = JSON.parse(localStorage.getItem('timers'));
+
+    timers.splice(
+      timers.findIndex(c => c.id === action.item.id),
+      1,
+    );
+
+    localStorage.setItem('timers', JSON.stringify(timers));
+
     if (true) {
       yield put(
         examDeleteSuccess(action.item.id, {
@@ -218,6 +272,7 @@ export function* loadItemsFlow() {
 export default function* adminSaga() {
   // See example in containers/HomePage/saga.js
 
+  yield takeLatest(LOAD_EXAMS, loadExams);
   yield takeLatest(EXAM_SAVE, examSaveFlow);
   yield takeLeading(EXAM_DELETE, examDeleteFlow);
   yield takeLatest(LOAD_ITEMS, loadItemsFlow);

@@ -53,6 +53,7 @@ import {
   resetForm,
   loadItems,
   loadFile,
+  loadExams,
 } from './actions';
 
 import { useInjectSaga } from 'utils/injectSaga';
@@ -71,6 +72,12 @@ function Admin() {
   useInjectReducer({ key: 'admin', reducer });
   useInjectSaga({ key: 'admin', saga });
 
+  
+  useEffect(() => {
+    dispatch(loadExams());
+  }, []);
+
+  
   /* eslint-disable no-unused-vars */
   const { admin } = useSelector(stateSelector);
   const dispatch = useDispatch();
