@@ -198,7 +198,6 @@ export function* examSaveFlow() {
     makeSelectAdmin(),
   );
 
-  console.log('llega hasta aqui');
   const now = new Date();
 
   let timer = {
@@ -265,6 +264,17 @@ export function* loadItemsFlow() {
     const { newItems } = yield select(
       makeSelectAdmin(),
     );
+
+    let timers = JSON.parse(localStorage.getItem('timers'));
+
+    if (timers) {
+      timers.push(...newItems.map( timer => ({ ...timer, id: uuidv4(), icon: randomIcon() }) ));
+    } else {
+      timers = newItems.map( timer => ({ ...timer, id: uuidv4(), icon: randomIcon() }) ); 
+    }
+
+    localStorage.setItem('timers', JSON.stringify(timers));
+
     yield put(loadItemsSuccess(newItems));
   
 }
