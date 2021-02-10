@@ -78,8 +78,8 @@ function TimerCard({item}) {
       if (started & timeLeft>1) {
         setTimeLeft(timeLeft-1);
 
-        if (timeLeft === 50) audio.current.play();
-        if (timeLeft === 30) audio.current.play();
+        if (timeLeft === 300) audio.current.play();
+        if (timeLeft === 600) audio.current.play();
 
       }
       if (timeLeft === 1) {
@@ -114,16 +114,15 @@ function TimerCard({item}) {
   return (
     <>
     <EuiCard
-     title={item.subject}
+     title={item.subject+' - '+item.name+ ' '+ item.level}
      isDisabled={item.icon === 'Kibana' ? true : false}
      icon={<EuiIcon size="xl" type={randomIcon()} />}
      description={
       <>
       <EuiTitle>
         <h2>
-          <EuiTextColor color="default"> {item.name} </EuiTextColor>
           <EuiTextColor color="default">{timeString(timeLeft)} </EuiTextColor>
-          <EuiTextColor color="default">{item.level} </EuiTextColor>
+
         </h2>
       </EuiTitle>
 
@@ -137,7 +136,7 @@ function TimerCard({item}) {
        />
      </>
      }
-    
+
     />
 
     <audio ref={audio} id="beep" preload="auto" src="https://soundbible.com/grab.php?id=1746&type=mp3" />
