@@ -17,6 +17,7 @@
    LOAD_ITEMS,
    LOAD_ITEMS_SUCCESS,
    RESET_FORM,
+   LOAD_EXAMS,
    LOAD_EXAMS_SUCCESS,
    LOAD_EXAMS_ERROR,
    EXAM_CLONE,
@@ -30,6 +31,16 @@
    EXAM_DELETE_ERROR,
 
  } from './constants';
+
+
+
+ /**
+  * Sets the exam table
+  * @param  {Object} examList is the list of exams
+  */
+ export function loadExams() {
+   return { type: LOAD_EXAMS };
+ }
 
 
  /**

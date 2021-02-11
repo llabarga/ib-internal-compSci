@@ -16,6 +16,7 @@ import {
   CHANGE_FORM_LOAD,
   LOAD_ITEMS_SUCCESS,
   RESET_FORM,
+  LOAD_EXAMS,
   LOAD_EXAMS_SUCCESS,
   LOAD_EXAMS_ERROR,
   EXAM_CLONE,
@@ -38,30 +39,7 @@ export const initialState = {
   readingTime: false,
   fecha: moment(),
   newItems: [],
-  items: [
-    {
-    id:1,
-    name: 'Prueba 1',
-    description: 'Lengua B',
-    subject: 'Lengua B',
-    level: 'NM',
-    duration: 75,
-    readingTime: false,
-    icon:'Cloud',
-  },
-
-  {
-    id:2,
-    name: 'Prueba 2',
-    description: 'Lengua B',
-    subject: 'Lengua B',
-    level: 'NS',
-    duration: 10,
-    readingTime: true,
-    icon:'Kibana',
-  },
-],
-
+  items: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */

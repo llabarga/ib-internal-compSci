@@ -7,6 +7,8 @@
  /*
   * Load exams into table
   */
+
+ export const LOAD_EXAMS = 'app/Exam/LOAD_EXAMS';  
  export const LOAD_EXAMS_SUCCESS = 'app/Exam/LOAD_EXAMS_SUCCESS';
  export const LOAD_EXAMS_ERROR = 'app/Exam/LOAD_EXAMS_ERROR';
 

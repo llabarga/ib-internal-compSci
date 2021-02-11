@@ -55,11 +55,6 @@ function TimerCard({item}) {
   );
 
 
-  const randomIcon = () => {
-    const icons = ['Kibana', 'Cloud', 'Maps', 'Observability',];
-    return `logo${icons[Math.floor(Math.random() * icons.length)]}`;
-  }
-
   const timeString = (seconds) => {
     var date = new Date(0);
     date.setSeconds(seconds);
@@ -98,7 +93,7 @@ function TimerCard({item}) {
     case `${idPrefix3}0`:
       //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor1
       setStarted(false);
-      setTimeLeft(item.length);
+      setTimeLeft(item.duration);
       break;
     case `${idPrefix3}1`:
       //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor2
@@ -126,6 +121,10 @@ function TimerCard({item}) {
         </h2>
       </EuiTitle>
 
+        <EuiTitle>
+          <EuiTextColor color="default">{timeString(timeLeft)} </EuiTextColor>
+        </EuiTitle>
+       <div>
        <EuiButtonGroup
          legend="Text align"
          name="textAlign"
@@ -134,6 +133,7 @@ function TimerCard({item}) {
          onChange={id => onChangeIcons(id)}
          isIconOnly
        />
+       </div>
      </>
      }
 
