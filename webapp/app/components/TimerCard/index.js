@@ -61,9 +61,18 @@ function TimerCard({item}) {
     return date.toISOString().substr(11,8);
   }
 
+  const timeStr = (fecha) => {
+    const fecha_corrected = new Date(fecha.getTime() + 60*60000)
+    return fecha_corrected.toISOString().substr(11,5);
+  }
+
   const [timer, setTimer] = useState();
   const [timeLeft, setTimeLeft] = useState(item.duration*60);
   const [started, setStarted] = useState(false);
+  const [firstStart, setFirst] = useState(true);
+
+  const [startTime, setStart] = useState(new Date());
+  // const [endTime, setEnd] = useState(new Date(startTime.getTime() + item.duration*60000));
 
   useEffect(() => {
 
@@ -73,8 +82,8 @@ function TimerCard({item}) {
       if (started & timeLeft>1) {
         setTimeLeft(timeLeft-1);
 
-        if (timeLeft === 50) audio.current.play();
-        if (timeLeft === 30) audio.current.play();
+        if (timeLeft === 600) audio.current.play();
+        if (timeLeft === 300) audio.current.play();
 
       }
       if (timeLeft === 1) {
@@ -94,14 +103,24 @@ function TimerCard({item}) {
       //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor1
       setStarted(false);
       setTimeLeft(item.duration);
+      setStart(new Date());
+      setFirst(true);
+
       break;
     case `${idPrefix3}1`:
       //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor2
       setStarted(true);
+
+      if (firstStart) {
+        setStart(new Date());
+        setFirst(false);
+      }
+
       break;
     case `${idPrefix3}2`:
       //Declaraciones ejecutadas cuando el resultado de expresión coincide con valorN
         setStarted(false);
+
   }
     setToggleIconIdSelected(optionId);
   };
@@ -109,12 +128,12 @@ function TimerCard({item}) {
   return (
     <>
     <EuiCard
-     title={item.subject}
+     title={item.subject+" "+item.level+" "+item.name}
      isDisabled={false}
      icon={<EuiIcon size="xl" type={item.icon} />}
      description={
       <>
-
+        <h3>{timeStr(startTime) + "-" + timeStr(new Date(startTime.getTime() + item.duration*60000))}</h3>
         <EuiTitle>
           <EuiTextColor color="default">{timeString(timeLeft)} </EuiTextColor>
         </EuiTitle>
