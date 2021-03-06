@@ -110,7 +110,7 @@ export function Nav() {
     {
       label: 'Timers',
       iconType: 'tableDensityExpanded',
-      onClick: () => history.push('/Admin'),
+      onClick: () => history.push({process.env.PUBLIC_URL + '/Admin'}),
     },
   ];
 

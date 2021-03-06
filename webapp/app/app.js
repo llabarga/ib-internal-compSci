@@ -73,7 +73,6 @@ render(translationMessages);
 // it's not most important operation and if main code fails,
 // we do not want it installed
 if (process.env.NODE_ENV === 'production') {
-  console.log('OfflinePluginRuntime installed');
   OfflinePluginRuntime.install({
     onUpdateReady: () => {
       // Send reload request to the user
