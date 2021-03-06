@@ -82,8 +82,8 @@ function TimerCard({item}) {
       if (started & timeLeft>1) {
         setTimeLeft(timeLeft-1);
 
-        if (timeLeft === 600) audio.current.play();
         if (timeLeft === 300) audio.current.play();
+        if (timeLeft === 600) audio.current.play();
 
       }
       if (timeLeft === 1) {
@@ -137,7 +137,7 @@ function TimerCard({item}) {
         <EuiTitle>
           <EuiTextColor color="default">{timeString(timeLeft)} </EuiTextColor>
         </EuiTitle>
-       <div> 
+       <div>
        <EuiButtonGroup
          legend="Text align"
          name="textAlign"
@@ -149,7 +149,7 @@ function TimerCard({item}) {
        </div>
      </>
      }
-    
+
     />
 
     <audio ref={audio} id="beep" preload="auto" src="https://soundbible.com/grab.php?id=1746&type=mp3" />
