@@ -47,7 +47,7 @@ const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
+        <ConnectedRouter history={history} basename={process.env.PUBLIC_URL}>
           <App />
         </ConnectedRouter>
       </LanguageProvider>

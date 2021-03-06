@@ -36,7 +36,7 @@ export function HomePage() {
   useEffect(() => {
 
     
-    if (!login.logged) history.push('/Login');
+    // if (!login.logged) history.push('/Login');
 
   });
 

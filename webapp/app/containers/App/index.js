@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch } from 'react-redux';
@@ -45,14 +45,13 @@ export function App() {
       </Helmet>
       <Nav />
       <AppWrapper>
-        <Switch>
-          <Route exact path="/" component={HomePage}/>
-          <Route exact path="/ib-internal-compSci/" component={HomePage}/>
-          <Route path="/Admin" component={Admin}/>
-          <Route path="/Visual" component={Visual}/>
-          <Route path="/Login" component={Login}/>
-          <Route component={NotFoundPage} />
-        </Switch>
+          <Switch>
+            <Route exact path="/" component={HomePage}/>
+            <Route exact path="/Admin" component={Admin}/>
+            <Route exact path="/Visual" component={Visual}/>
+            <Route exact path="/Login" component={Login}/>
+            <Route component={NotFoundPage} />      
+          </Switch>    
       </AppWrapper>
       <Toaster />
       <GlobalStyle />
