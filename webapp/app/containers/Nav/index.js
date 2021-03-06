@@ -106,11 +106,12 @@ export function Nav() {
 
   ];
 
+
   const timers = [
     {
       label: 'Timers',
       iconType: 'tableDensityExpanded',
-      onClick: () => history.push({process.env.PUBLIC_URL + '/Admin'}),
+      onClick: () => history.push('/Admin'),
     },
   ];
 

@@ -46,9 +46,9 @@ export function App() {
       <Nav />
       <AppWrapper>
           <Switch>
-            <Route exact path={process.env.PUBLIC_URL + '/'} component={HomePage}/>
-            <Route path={process.env.PUBLIC_URL + '/Admin'} component={Admin}/>
-            <Route path={process.env.PUBLIC_URL + '/Visual'} component={Visual}/>
+            <Route exact path='/' component={HomePage}/>
+            <Route path='/Admin' component={Admin}/>
+            <Route path='/Visual' component={Visual}/>
             <Route path="/Login" component={Login}/>
             <Route component={NotFoundPage} />      
           </Switch>    
