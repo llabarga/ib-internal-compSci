@@ -19,7 +19,7 @@ import {
 export default () => (
   <Page restrictWidth={500}>
     <EuiEmptyPrompt
-      iconType="faceSad"
+      iconType="visGauge"
       title={<FormattedMessage {...messages.header} />}
       body={
         <Fragment>

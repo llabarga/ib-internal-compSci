@@ -201,13 +201,15 @@ function Admin() {
         </div>
       </EuiFlexItem>
 
-        <EuiFlexItem>
-          <TimerTable
-            items={admin.items}
-            onRowEdit={onRowEdit}
-            onRowDelete={onRowDelete}
-          />
-        </EuiFlexItem>
+      <EuiFlexItem>
+        <TimerTable
+          items={admin.items}
+          onRowEdit={onRowEdit}
+          onRowDelete={onRowDelete}
+        />
+      </EuiFlexItem>
+
+        
       </EuiFlexGroup>
 
       {isOpen ? (

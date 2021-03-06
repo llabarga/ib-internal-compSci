@@ -46,10 +46,11 @@ export function App() {
       <Nav />
       <AppWrapper>
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/Admin" component={Admin} />
-          <Route path="/Visual" component={Visual} />
-          <Route path="/Login" component={Login} />
+          <Route exact path="/" component={HomePage}/>
+          <Route exact path="/ib-internal-compSci/" component={HomePage}/>
+          <Route path="/Admin" component={Admin}/>
+          <Route path="/Visual" component={Visual}/>
+          <Route path="/Login" component={Login}/>
           <Route component={NotFoundPage} />
         </Switch>
       </AppWrapper>

@@ -110,7 +110,7 @@ export function Nav() {
     {
       label: 'Timers',
       iconType: 'tableDensityExpanded',
-      onClick: () => history.push('/Admin'),
+      onClick: () => history.push('Admin'),
     },
   ];
 
@@ -118,7 +118,7 @@ export function Nav() {
     {
       label: 'Cards',
       iconType: 'clock',
-      onClick: () => history.push('/Visual'),
+      onClick: () => history.push('Visual'),
     },
   ];
 
@@ -126,7 +126,7 @@ export function Nav() {
     {
       label: 'Enter',
       iconType: 'lockOpen',
-      onClick: () => history.push('/Login'),
+      onClick: () => history.push('Login'),
     },
   ];
 

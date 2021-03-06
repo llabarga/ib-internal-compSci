@@ -10,14 +10,14 @@ export const scope = 'app.containers.NotFoundPage';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'The page you\'re looking for was not found.',
+    defaultMessage: 'Welcome to the POMIDOR timer app.',
   },
   body: {
     id: `${scope}.body`,
-    defaultMessage: 'Seems like you are lost, if you think this is an error, please contact our team. Thanks'
+    defaultMessage: 'This is a development for the IB Computer Science'
   },
   back: {
     id: `${scope}.back`,
-    defaultMessage: 'Go back'
+    defaultMessage: 'Login'
   }
 });

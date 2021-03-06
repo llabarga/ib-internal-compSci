@@ -17,6 +17,7 @@ module.exports = require('./webpack.base.babel')({
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
+    publicPath: '/ib-internal-compSci/',
   },
 
   optimization: {
@@ -82,8 +83,8 @@ module.exports = require('./webpack.base.babel')({
     // Put it in the end to capture all the HtmlWebpackPlugin's
     // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
     new OfflinePlugin({
-      relativePaths: false,
-      publicPath: '/',
+      relativePaths: true,
+      publicPath: '/ib-internal-compSci/',
       appShell: '/',
       // Enable automatic updates of the ServiceWorker. If set to `true`, it uses
       // default interval of 1 hour.
@@ -115,9 +116,9 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     new WebpackPwaManifest({
-      name: 'AppMed - IOMED',
-      short_name: 'AppMed',
-      description: 'Graphical interface to the IOMED tools',
+      name: 'Pomidor - IB',
+      short_name: 'pomidor',
+      description: 'Exam timing control',
       background_color: '#fafafa',
       theme_color: '#4166dd',
       inject: true,
