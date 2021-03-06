@@ -201,13 +201,15 @@ function Admin() {
         </div>
       </EuiFlexItem>
 
-        <EuiFlexItem>
-          <TimerTable
-            items={admin.items}
-            onRowEdit={onRowEdit}
-            onRowDelete={onRowDelete}
-          />
-        </EuiFlexItem>
+      <EuiFlexItem>
+        <TimerTable
+          items={admin.items}
+          onRowEdit={onRowEdit}
+          onRowDelete={onRowDelete}
+        />
+      </EuiFlexItem>
+
+        
       </EuiFlexGroup>
 
       {isOpen ? (
@@ -256,8 +258,8 @@ function Admin() {
                     >
                       <EuiSelect
                         options={[
-                          { value: 'option_one', text: 'High level' },
-                          { value: 'option_two', text: 'Standard level' },
+                          { value: 'NS', text: 'High level' },
+                          { value: 'NM', text: 'Standard level' },
                         ]}
                         onChange={evt => dispatch(changeFormLevel(evt.target.value))}
                         value={admin.level}

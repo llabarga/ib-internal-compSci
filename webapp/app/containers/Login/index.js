@@ -38,6 +38,12 @@ import {
 } from '@elastic/eui';
 
 import {
+    changeLoginUserName,
+    changeLoginPassword,
+    changeRegisterName,
+    changeRegisterEmail,
+    changeRegisterPass,
+    changeRegisterPassConfirm,
     doLogin,
 } from "./actions";
 
@@ -69,6 +75,12 @@ export function Login() {
     setValue(e.target.value);
   };
 
+
+  const register = () =>{
+    closeFlyout();
+    dispatch(doLogin());
+  }
+  
   const closeFlyout = () => setIsFlyoutVisible(false);
 
   const showFlyout = () => setIsFlyoutVisible(true);
@@ -104,34 +116,39 @@ export function Login() {
             <EuiFormRow label="Nombre">
               <EuiFieldText
                 placeholder="Nombre"
-                value={login.displayName}
+                value={login.reg_name}
                 prepend={<EuiIcon type="user" />}
-                //onChange={handleLogin}
+                onChange={evt =>
+                        dispatch(changeRegisterName(evt.target.value))
+                }
                 aria-label="Nombre"
               />
             </EuiFormRow>
             <EuiFormRow label="Email">
               <EuiFieldText
                 placeholder="Email"
-                value={login.email}
+                value={login.reg_email}
                 prepend={<EuiIcon type="email" />}
-                //onChange={handleLogin}
+                onChange={evt =>
+                        dispatch(changeRegisterEmail(evt.target.value))}
                 aria-label="Email"
               />
             </EuiFormRow>
             <EuiFormRow label="Contraseña">
               <EuiFieldPassword
                 placeholder="Contraseña"
-                value={login.password}
-                //onChange={handleLogin}
+                value={login.reg_pass}
+                onChange={evt =>
+                        dispatch(changeRegisterPass(evt.target.value))}
                 aria-label="Contraseña"
               />
             </EuiFormRow>
             <EuiFormRow label="Confirmar contraseña">
               <EuiFieldPassword
                 placeholder="Confirmar contraseña"
-                value={login.confirmPassword}
-                //onChange={handleLogin}
+                value={login.reg_pass_confirm}
+                onChange={evt =>
+                        dispatch(changeRegisterPassConfirm(evt.target.value))}
                 aria-label="Confirmar contraseña"
               />
             </EuiFormRow>
@@ -161,34 +178,23 @@ export function Login() {
           <EuiFieldText
             name="email"
             placeholder="email@salessianssarria.com"
-            // onChange={(evt) => dispatch(changeFormEmail(evt.target.value))}
-            // value={login.email}
-            // isLoading={login.currentlySending}
-            // isInvalid={failedForm}
+            onChange={(evt) => dispatch(changeLoginUserName(evt.target.value))}
+            value={login.user}
           />
         </EuiFormRow>
         <EuiFormRow label="Password">
           <EuiFieldPassword
             name="password"
-            // onChange={(evt) => dispatch(changeFormPassword(evt.target.value))}
-            // onKeyPress={(event) =>
-            //   event.key === 'Enter' ? dispatch(loginRequest()) : null
-            // }
-            // value={login.password}
-            isLoading={false}
-            isInvalid={true}
+            onChange={(evt) => dispatch(changeLoginPassword(evt.target.value))}
+            onKeyPress={(event) =>
+              event.key === 'Enter' ? dispatch(loginRequest()) : null
+            }
+            value={login.password}
           />
         </EuiFormRow>
         <EuiSpacer size="m" />
         <EuiButton
           onClick={handleLogin}
-          // onClick={(evt) => {
-          //   if (evt !== undefined && evt.preventDefault) {
-          //     evt.preventDefault();
-          //   }
-          //   dispatch(loginRequest());
-          // }}
-          // isLoading={login.currentlySending}
           fill
         >
           <FormattedMessage {...m.submit} />

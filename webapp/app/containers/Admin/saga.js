@@ -50,7 +50,10 @@ const randomIcon = () => {
  */
 export function* loadExams() {
   
-  let timers = JSON.parse(localStorage.getItem('timers'));
+  console.log(localStorage.getItem('timers'));
+
+  let timers = JSON.parse(localStorage.getItem('timers')) || [];
+  console.log(timers);
 
   yield put(loadExamsSuccess(timers));
 

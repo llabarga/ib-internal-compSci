@@ -53,10 +53,6 @@ import m from './messages';
 // ];
 
 
-
-
-
-
 function TimerTable({items, onRowEdit, onRowClone, onRowDelete}) {
 
   const [pageIndex, setPageIndex] = useState(0);
@@ -70,6 +66,8 @@ function TimerTable({items, onRowEdit, onRowClone, onRowDelete}) {
     setPageSize(pageSize);
   };
 
+  console.log(items);
+  
   const totalItemCount = items.length;
 
   const pagination = {
