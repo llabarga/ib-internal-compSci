@@ -29,12 +29,12 @@ import m from './messages';
 import Page from 'components/Page';
 import TimerCard from 'components/TimerCard';
 
+import {loadExams} from '../Admin/actions';
 
 const stateSelector = createStructuredSelector({
   visual: makeSelectVisual(),
   admin: makeSelectAdmin(),
 });
-
 
 
 function Visual() {
@@ -46,6 +46,10 @@ function Visual() {
   const dispatch = useDispatch();
   /* eslint-enable no-unused-vars */
 
+
+  useEffect(() => {
+    dispatch(loadExams());
+  }, []);
 
   // const timers = visual.items.map((t) => ({'name': t.name, 'time': t.length}));
   // const [timeLeft, setTimeLeft] = useState(timers);
