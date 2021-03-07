@@ -69,6 +69,8 @@ if (module.hot) {
 // Fire the App render
 render(translationMessages);
 
+console.log(process.env.NODE_ENV );
+console.log(process.env.PUBLIC_URL );
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
 // we do not want it installed
