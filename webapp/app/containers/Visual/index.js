@@ -46,7 +46,6 @@ function Visual() {
   const dispatch = useDispatch();
   /* eslint-enable no-unused-vars */
 
-
   useEffect(() => {
     dispatch(loadExams());
   }, []);
