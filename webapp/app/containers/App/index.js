@@ -50,7 +50,7 @@ export function App() {
             <Route path='/Admin' component={Admin}/>
             <Route path='/Visual' component={Visual}/>
             <Route path="/Login" component={Login}/>
-            <Route component={NotFoundPage} />      
+            <Route component={HomePage} />      
           </Switch>    
       </AppWrapper>
       <Toaster />

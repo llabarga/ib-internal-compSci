@@ -49,7 +49,7 @@
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
-    "predeploy": "PUBLIC_URL=https://llabarga.github.io/ib-internal-compSci/ npm run build",
+    "predeploy": "cross-env PUBLIC_URL=https://llabarga.github.io/ib-internal-compSci/ npm run build",
     "deploy": "gh-pages -d build"
   },
   "lint-staged": {
